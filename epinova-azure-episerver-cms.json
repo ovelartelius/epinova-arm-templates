@@ -68,17 +68,18 @@
       "name": "[concat(parameters('BaseName'), '-hostingplan')]",
       "type": "Microsoft.Web/serverfarms",
       "location": "[parameters('location')]",
-      "apiVersion": "2014-06-01",
+      "apiVersion": "2018-02-01",
       "tags": {
-        "displayName": "WebApplication-HostingPlanName"
+        "displayName": "[concat(parameters('BaseName'), '-hostingplan')]"
       },
       "sku": {
-        "name": "S1",
-        "tier": "Standard",
-        "size": "S1",
-        "family": "S",
-        "capacity": 1
+        "name": "D1",
+        "tier": "Shared",
+        "size": "D1",
+        "family": "D",
+        "capacity": 0
       },
+      "kind": "app",
       "properties": {
         "name": "[concat(parameters('BaseName'), '-hostingplan')]",
         "workerSize": "0",
@@ -98,7 +99,7 @@
       ],
       "tags": {
         "[concat('hidden-related:', resourceGroup().id, '/providers/Microsoft.Web/serverfarms/', parameters('BaseName'), '-hostingplan')]": "Resource",
-        "displayName": "WebApplication-WebApp"
+        "displayName": "[concat(parameters('BaseName'), '-dev')]"
       },
       "properties": {
         "name": "[concat(parameters('BaseName'), '-dev')]",
@@ -115,7 +116,7 @@
             "[concat('Microsoft.Web/sites/', parameters('BaseName'), '-dev')]"
           ],
           "tags": {
-            "displayName": "WebApplication-WebApp-ConnectionStrings"
+            "displayName": "[concat(parameters('BaseName'), '-dev-ConnectionStrings')]"
           },
           "properties": {
             "EPiServerAzureBlobs": {
@@ -140,7 +141,7 @@
             "[resourceId('Microsoft.Web/sites', concat(parameters('BaseName'), '-dev'))]"
           ],
           "tags": {
-            "displayName": "WebApplication-WebApp-ApplicationSettings"
+            "displayName": "[concat(parameters('BaseName'), '-dev-ApplicationSettings')]"
           },
           "properties": {
             "episerver:ReadOnlyConfigurationAPI": "True"
@@ -154,7 +155,7 @@
             "[resourceId('Microsoft.Web/sites', concat(parameters('BaseName'), '-dev'))]"
           ],
           "tags": {
-            "displayName": "WebApplication-WebApp-GeneralSettings"
+            "displayName": "[concat(parameters('BaseName'), '-dev-GeneralSettings')]"
           },
           "properties": {
             "webSocketsEnabled": "True",
@@ -230,6 +231,11 @@
           "dependsOn": [
             "[concat(parameters('BaseName'), '-sqlserver')]"
           ],
+          "sku": {
+              "name": "Basic",
+              "tier": "Basic",
+              "capacity": 5
+          },
           "tags": {
             "displayName": "SQL-Database"
           },
