@@ -224,13 +224,14 @@
           }
         },
         {
-          "name": "[concat(parameters('BaseName'), '-epi')]",
+          "name": "[concat(parameters('BaseName'), 'epicms')]",
           "type": "databases",
           "location": "[parameters('location')]",
-          "apiVersion": "2014-04-01",
+          "apiVersion": "2020-08-01-preview",
           "dependsOn": [
             "[concat(parameters('BaseName'), '-sqlserver')]"
           ],
+          "kind": "v12.0,user",
           "sku": {
               "name": "Basic",
               "tier": "Basic",
@@ -242,8 +243,11 @@
           "properties": {
             "collation": "[parameters('SQL-DatabaseCollation')]",
             "edition": "Basic",
-            "maxSizeBytes": "1073741824",
-            "requestedServiceObjectiveName": "Basic"
+            "catalogCollation": "[parameters('SQL-DatabaseCollation')]",
+            "maxSizeBytes": "2147483648",
+            "zoneRedundant": false,
+            "readScale": "Disabled",
+            "storageAccountType": "GRS"
           }
         }
       ],
