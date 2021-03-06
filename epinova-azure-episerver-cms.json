@@ -158,7 +158,8 @@
             "displayName": "[concat(parameters('BaseName'), '-dev-GeneralSettings')]"
           },
           "properties": {
-            "webSocketsEnabled": "True"
+            "webSocketsEnabled": "True",
+            "alwaysOn": "False"
           }
         }
       ]
