@@ -212,7 +212,7 @@
       "resources": [
         {
           "name": "AllowAllWindowsAzureIps",
-          "type": "firewallrules",
+          "type": "firewallRules",
           "location": "[parameters('location')]",
           "apiVersion": "2014-04-01",
           "dependsOn": [
@@ -264,7 +264,8 @@
       "sku": {
         "name": "Standard",
         "tier": "Standard"
-      }
+      },
+      "properties": {}
     }
   ]
 }
